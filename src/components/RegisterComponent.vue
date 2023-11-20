@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!token">
     <form v-on:submit.prevent="register()">
         <label>Nombre</label>
         <input type="text" class="form-control" v-model="usuario.nombre">
@@ -9,6 +9,9 @@
         <input type="password" class="form-control" v-model="usuario.pass">
         <button class="btn btn-warning">Registrarse</button>
     </form>
+  </div>
+  <div v-if="token">
+    <h1>Ya estas logueado</h1>
   </div>
 </template>
 
@@ -26,7 +29,8 @@ export default {
                 nombre: "",
                 email: "",
                 pass: ""
-            }
+            },
+            token: localStorage.getItem('token')
         }
     },
     methods: {
